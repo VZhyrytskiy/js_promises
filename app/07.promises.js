@@ -82,14 +82,50 @@ console.log('Topic: Promises');
 // кнопку "Cancel Promise". Добавьте обработчик для кнопки.
 // Используя метод race организуйте "отмену промиса".
 
+const p_12_1 = new Promise(resolve => {
+    setTimeout(resolve, 5000, "Promise Data")
+})
+
+const p_12_2 = new Promise((reject) => {
+    reject('Some Error');
+})
+
+
+document.querySelector('#btn-reject-promise').addEventListener('click', () => {
+    p_12_2.catch((err) => console.log(err))
+});
+
+const p_12 = Promise.race([p_12_1, p_12_2])
+    .then((message) => console.log(message))
+
 // Task 13
 // Создайте два промиса. Первый промис возвращает объект { name: "Anna" } через 2с,
 // Второй промис переходит в состояние rejected со значением "Promise Error".
 // Запустите оба эти промисы в параллель и получите результаты тех, которые завершаться успешно
 
+const p_13_1 = new Promise(resolve => {
+    setTimeout(resolve, 2000, {name: "Anna"})
+})
+
+const p_13_2 = Promise.reject('Promise Error');
+
+const p13 = Promise.any([p_13_1, p_13_2])
+    .then((message) => console.log(message))
 
 
 // Task 14
 // Создайте два промиса. Первый промис возвращает объект { name: "Anna" } через 2с,
 // Второй промис возвращает дефолтный объект { name: "Unknown" } через 1с.
 // Запустите оба эти промисы в параллель и получите результат того, который отработает первым
+
+const p_14_1 = new Promise(resolve => {
+    setTimeout(resolve, 2000, {name: "Anna"})
+})
+
+const p_14_2 = new Promise(resolve => {
+    setTimeout(resolve, 1000, {name: "Unknown"})
+})
+
+const p14 = Promise.race([p_14_1, p_14_2])
+    .then((message) => console.log(message))
+
