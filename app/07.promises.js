@@ -87,6 +87,9 @@ const p_12_1 = new Promise(resolve => {
 })
 
 const p_12_2 = new Promise((reject) => {
+    
+    // этот код надо выполнять по клику на кнопку, тоесть либо сбда перенести код обработчика,
+    // либо как мы делали создать ссылку на метод reject и вызвать в обработчике
     reject('Some Error');
 })
 
@@ -109,6 +112,7 @@ const p_13_1 = new Promise(resolve => {
 
 const p_13_2 = Promise.reject('Promise Error');
 
+// в даном случае ок, но лучше allSettled
 const p13 = Promise.any([p_13_1, p_13_2])
     .then((message) => console.log(message))
 
